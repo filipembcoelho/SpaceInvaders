@@ -30,11 +30,19 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        # if keystroke is pressed, check whether is right or left
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                print("Left")
+            if event.key == pygame.K_RIGHT:
+                print("Right")
+            if event.key == pygame.K_UP:
+                print("Up")
+            if event.key == pygame.K_DOWN:
+                print("Down")
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                print("Released")
 
-    # for illusion of movement only
-    # playerX += 0.1
-    # playerY -= 0.1
     player(playerX, playerY)
     pygame.display.update()
-
-
