@@ -16,8 +16,8 @@ playerX = 368  # (800 / 2) - (64 / 2) = 368 (half of the screen)
 playerY = 480
 
 
-def player():
-    screen.blit(playerImg, (playerX, playerY))
+def player(x, y):
+    screen.blit(playerImg, (x, y))
 
 
 # listen for the QUIT event on the screen - infinite loop
@@ -31,7 +31,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    player()
+    # for illusion of movement only
+    # playerX += 0.1
+    # playerY -= 0.1
+    player(playerX, playerY)
     pygame.display.update()
 
 
