@@ -67,6 +67,9 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 textX = 10
 textY = 10
 
+# game over
+game_over_font = pygame.font.Font('freesansbold.ttf', 64)
+
 
 # player coordinates
 def player(x, y):
@@ -98,6 +101,12 @@ def show_score():
     # First render the test and then draw it on the screen
     score_render = font.render("Score: " + str(score), True, (255, 255, 255))
     screen.blit(score_render, (textX, textY))
+
+
+def game_over_text():
+    # First render the test and then draw it on the screen
+    over_render = game_over_font.render("GAME OVER", True, (255, 255, 255))
+    screen.blit(over_render, (200, 250))
 
 
 # listen for the QUIT event on the screen - infinite loop
@@ -168,6 +177,14 @@ while running:
 
     # detect which enemy
     for i in range(num_of_enemies):
+        # Game over on enemy crossing boundary
+        if enemyY[i] > 440:
+            for j in range(num_of_enemies):
+                # move all enemies outside of the screen
+                enemyY[j] = 2000
+            game_over_text()
+            break
+
         # Enemy movement
         enemyX[i] += enemyX_change[i]
 
