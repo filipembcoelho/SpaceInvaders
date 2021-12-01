@@ -174,6 +174,9 @@ while running:
             # reset enemy
             enemyX[i] = random.randint(0, 735)
             enemyY[i] = random.randint(50, 200)
+            # play explosion sound
+            bullet_sound = mixer.Sound('sounds/explosion.wav')
+            bullet_sound.play()
         # placement of enemy
         enemy(enemyX[i], enemyY[i], i)
 
