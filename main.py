@@ -21,8 +21,8 @@ background = pygame.image.load('images/background.png')
 
 # sounds
 mixer.music.load('sounds/background.wav')
-mixer.music.play(-1)
-musicOn = True
+musicOn = False
+soundsOn = False
 
 # Speed
 speed = 1.5
@@ -121,13 +121,19 @@ while running:
             if event.key == pygame.K_RIGHT:
                 playerX_change = speed
             # music on/off
-            if event.key == pygame.K_s:
+            if event.key == pygame.K_m:
                 if musicOn:
                     mixer.music.stop()
                     musicOn = False
                 else:
-                    mixer.music.play()
+                    mixer.music.play(-1)
                     musicOn = True
+            # sounds on/off
+            if event.key == pygame.K_s:
+                if soundsOn:
+                    soundsOn = False
+                else:
+                    soundsOn = True
             # bullet event when space is pressed
             if event.key == pygame.K_SPACE:
                 if bulletState == "ready":
@@ -135,8 +141,9 @@ while running:
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
                     # play laser sound
-                    bullet_sound = mixer.Sound('sounds/laser.wav')
-                    bullet_sound.play()
+                    if soundsOn:
+                        bullet_sound = mixer.Sound('sounds/laser.wav')
+                        bullet_sound.play()
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -184,8 +191,9 @@ while running:
             enemyX[i] = random.randint(0, 735)
             enemyY[i] = random.randint(50, 200)
             # play explosion sound
-            bullet_sound = mixer.Sound('sounds/explosion.wav')
-            bullet_sound.play()
+            if soundsOn:
+                explosion_sound = mixer.Sound('sounds/explosion.wav')
+                explosion_sound.play()
         # placement of enemy
         enemy(enemyX[i], enemyY[i], i)
 
