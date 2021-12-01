@@ -88,6 +88,7 @@ while running:
             # bullet event when space is pressed
             if event.key == pygame.K_SPACE:
                 if bulletState == "ready":
+                    # get the current X coordinate of the player
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
 
