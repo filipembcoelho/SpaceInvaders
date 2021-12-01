@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 import random
 import math
 
@@ -17,6 +18,10 @@ shipWidth = 64
 
 # background
 background = pygame.image.load('images/background.png')
+
+# sounds
+mixer.music.load('sounds/background.wav')
+mixer.music.play(-1)
 
 # Speed
 speed = 1.5
