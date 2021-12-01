@@ -103,7 +103,6 @@ while running:
                 if bulletState == "ready":
                     # get the current X coordinate of the player
                     bulletX = playerX
-                    score -= 1
                     fire_bullet(bulletX, bulletY)
 
         if event.type == pygame.KEYUP:
@@ -145,7 +144,7 @@ while running:
         bulletY = playerY
         bulletState = "ready"
         # add score
-        score += 3
+        score += 1
         print(score)
         # reset enemy
         enemyX = random.randint(0, 735)
