@@ -87,7 +87,8 @@ while running:
                 playerX_change = speed
             # bullet event when space is pressed
             if event.key == pygame.K_SPACE:
-                bulletX = playerX
+                if bulletState == "ready":
+                    bulletX = playerX
                 fire_bullet(bulletX, bulletY)
 
         if event.type == pygame.KEYUP:
