@@ -19,14 +19,26 @@ playerX = 368  # (800 / 2) - (64 / 2) = 368 (half of the screen)
 playerY = 480
 playerX_change = 0
 
+# Enemy
+enemyImg = pygame.image.load('images/enemy.png')
+enemyX = 0
+enemyY = 0
+enemyX_change = 0
+
 speed = 0.1
 
 boundaryLeft = 0
 boundaryRight = 800
 
 
+# player coordinates
 def player(x, y):
     screen.blit(playerImg, (x, y))
+
+
+# enemy coordinates
+def enemy(x, y):
+    screen.blit(enemyImg, (x, y))
 
 
 # listen for the QUIT event on the screen - infinite loop
@@ -58,5 +70,5 @@ while running:
         playerX = boundaryRight - shipWidth
 
     player(playerX, playerY)
-
+    enemy(enemyX, enemyY)
     pygame.display.update()
