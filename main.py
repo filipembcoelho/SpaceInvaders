@@ -57,6 +57,9 @@ boundaryRight = 800
 
 # score
 score = 0
+font = pygame.font.Font('freesansbold.ttf', 32)
+textX = 10
+textY = 10
 
 
 # player coordinates
@@ -83,6 +86,12 @@ def is_collision(enemy_x, enemy_y, bullet_x, bullet_y):
         return True
     else:
         return False
+
+
+def show_score():
+    # First render the test and then draw it on the screen
+    score_render = font.render("Score: " + str(score), True, (255, 255, 255))
+    screen.blit(score_render, (textX, textY))
 
 
 # listen for the QUIT event on the screen - infinite loop
@@ -154,7 +163,6 @@ while running:
             bulletState = "ready"
             # add score
             score += 1
-            print(score)
             # reset enemy
             enemyX[i] = random.randint(0, 735)
             enemyY[i] = random.randint(50, 200)
@@ -163,5 +171,5 @@ while running:
 
     # placement of objects
     player(playerX, playerY)
-
+    show_score()
     pygame.display.update()
