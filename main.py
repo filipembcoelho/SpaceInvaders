@@ -105,6 +105,10 @@ while running:
     if bulletState == "fire":
         fire_bullet(playerX, bulletY)
         bulletY -= bulletY_change
+    # Bullet reset on boundary
+    if bulletY <= 0:
+        bulletY = playerY
+        bulletState = "ready"
 
     # Enemy movement
     enemyX += enemyX_change
