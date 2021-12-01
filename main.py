@@ -14,6 +14,10 @@ pygame.display.set_caption('Space Invaders')
 pygame.display.set_icon(pygame.image.load('images/ufo.png'))
 shipWidth = 64
 
+# Speed
+speed = 0.1
+enemySpeed = 0.1
+
 # Player
 playerImg = pygame.image.load('images/player.png')
 playerX = 368  # (800 / 2) - (64 / 2) = 368 (half of the screen)
@@ -24,9 +28,8 @@ playerX_change = 0
 enemyImg = pygame.image.load('images/enemy.png')
 enemyX = random.randint(0, 800)
 enemyY = random.randint(50, 200)
-enemyX_change = 0
-
-speed = 0.1
+enemyX_change = enemySpeed
+enemyY_change = 0
 
 boundaryLeft = 0
 boundaryRight = 800
@@ -64,12 +67,23 @@ while running:
 
     playerX += playerX_change
 
-    # boundary control for X axis
+    # Player: boundary control for X axis
     if playerX < boundaryLeft:
         playerX = 0
     elif playerX > boundaryRight - shipWidth:
         playerX = boundaryRight - shipWidth
 
+    # Enemy movement
+    enemyX += enemyX_change
+
+    # Enemy: boundary control for X axis
+    if enemyX <= boundaryLeft:
+        enemyX_change = speed
+    elif enemyX >= boundaryRight - shipWidth:
+        enemyX_change = -speed
+
+    # placement of objects
     player(playerX, playerY)
     enemy(enemyX, enemyY)
+
     pygame.display.update()
