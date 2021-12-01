@@ -125,6 +125,9 @@ while running:
                     # get the current X coordinate of the player
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
+                    # play laser sound
+                    bullet_sound = mixer.Sound('sounds/laser.wav')
+                    bullet_sound.play()
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
