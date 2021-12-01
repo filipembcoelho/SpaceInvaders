@@ -1,5 +1,6 @@
 import pygame
 import random
+import math
 
 # Initialize pygame package (mandatory)
 pygame.init()
@@ -19,7 +20,7 @@ background = pygame.image.load('images/background.png')
 
 # Speed
 speed = 1.5
-enemySpeed = 1.5
+enemySpeed = 1
 bulletSpeed = 10
 
 # Player
@@ -30,7 +31,7 @@ playerX_change = 0
 
 # Enemy
 enemyImg = pygame.image.load('images/enemy.png')
-enemyX = random.randint(0, 800)
+enemyX = random.randint(0, 735)
 enemyY = random.randint(50, 200)
 enemyX_change = enemySpeed
 enemyY_change = 40
@@ -46,6 +47,9 @@ bulletState = "ready"
 
 boundaryLeft = 0
 boundaryRight = 800
+
+# score
+score = 0
 
 
 # player coordinates
@@ -63,6 +67,15 @@ def fire_bullet(x, y):
     bulletState = "fire"
     # start from the middle of the player ship
     screen.blit(bulletImg, (x + 16, y + 10))
+
+
+def is_collision(enemy_x, enemy_y, bullet_x, bullet_y):
+    distance = math.sqrt(math.pow(enemy_x - bullet_x, 2) + math.pow(enemy_y - bullet_y, 2))
+    # distance = math.hypot(enemy_x - bullet_x, enemy_y - bullet_y)
+    if distance < 27:
+        return True
+    else:
+        return False
 
 
 # listen for the QUIT event on the screen - infinite loop
@@ -123,6 +136,19 @@ while running:
     elif enemyX >= boundaryRight - shipWidth:
         enemyX_change = -speed
         enemyY += enemyY_change
+
+    # collision
+    collision = is_collision(enemyX, enemyY, bulletX, bulletY)
+    if collision:
+        # reset bullet
+        bulletY = playerY
+        bulletState = "ready"
+        # add score
+        score += 2
+        print(score)
+        # reset enemy
+        enemyX = random.randint(0, 735)
+        enemyY = random.randint(50, 200)
 
     # placement of objects
     player(playerX, playerY)
