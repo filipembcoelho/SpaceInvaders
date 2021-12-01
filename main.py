@@ -22,6 +22,7 @@ background = pygame.image.load('images/background.png')
 # sounds
 mixer.music.load('sounds/background.wav')
 mixer.music.play(-1)
+musicOn = True
 
 # Speed
 speed = 1.5
@@ -119,6 +120,14 @@ while running:
                 playerX_change = -speed
             if event.key == pygame.K_RIGHT:
                 playerX_change = speed
+            # music on/off
+            if event.key == pygame.K_s:
+                if musicOn:
+                    mixer.music.stop()
+                    musicOn = False
+                else:
+                    mixer.music.play()
+                    musicOn = True
             # bullet event when space is pressed
             if event.key == pygame.K_SPACE:
                 if bulletState == "ready":
