@@ -102,7 +102,7 @@ while running:
         playerX = boundaryRight - shipWidth
 
     # Bullet movement
-    if bulletState is "fire":
+    if bulletState == "fire":
         fire_bullet(playerX, bulletY)
         bulletY -= bulletY_change
 
