@@ -87,7 +87,8 @@ while running:
                 playerX_change = speed
             # bullet event when space is pressed
             if event.key == pygame.K_SPACE:
-                fire_bullet(playerX, bulletY)
+                bulletX = playerX
+                fire_bullet(bulletX, bulletY)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -103,7 +104,7 @@ while running:
 
     # Bullet movement
     if bulletState == "fire":
-        fire_bullet(playerX, bulletY)
+        fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
     # Bullet reset on boundary
     if bulletY <= 0:
