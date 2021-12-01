@@ -75,14 +75,20 @@ while running:
 
     # everything that happens inside the game window, should be inside this infinite loop
     for event in pygame.event.get():
+        # quit event
         if event.type == pygame.QUIT:
             running = False
-        # if keystroke is pressed, check whether is right or left
+        # if keystroke is pressed
         if event.type == pygame.KEYDOWN:
+            # player spaceship: check whether is right or left
             if event.key == pygame.K_LEFT:
                 playerX_change = -speed
             if event.key == pygame.K_RIGHT:
                 playerX_change = speed
+            # bullet event when space is pressed
+            if event.key == pygame.K_SPACE:
+                fire_bullet(playerX, bulletY)
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
@@ -94,6 +100,11 @@ while running:
         playerX = 0
     elif playerX > boundaryRight - shipWidth:
         playerX = boundaryRight - shipWidth
+
+    # Bullet movement
+    if bulletState is "fire":
+        fire_bullet(playerX, bulletY)
+        bulletY -= bulletY_change
 
     # Enemy movement
     enemyX += enemyX_change
