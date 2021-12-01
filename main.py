@@ -29,12 +29,19 @@ playerX = 368  # (800 / 2) - (64 / 2) = 368 (half of the screen)
 playerY = 480
 playerX_change = 0
 
-# Enemy
-enemyImg = pygame.image.load('images/enemy.png')
-enemyX = random.randint(0, 735)
-enemyY = random.randint(50, 200)
-enemyX_change = enemySpeed
-enemyY_change = 40
+# Enemies Create several enemies inside a list
+enemyImg = []
+enemyX = []
+enemyY = []
+enemyX_change = []
+enemyY_change = []
+num_of_enemies = 6
+for i in range(num_of_enemies):
+    enemyImg.append(pygame.image.load('images/enemy.png'))
+    enemyX.append(random.randint(0, 735))
+    enemyY.append(random.randint(50, 200))
+    enemyX_change.append(enemySpeed)
+    enemyY_change.append(40)
 
 # Bullet
 bulletImg = pygame.image.load('images/bullet.png')
