@@ -65,8 +65,8 @@ def player(x, y):
 
 
 # enemy coordinates
-def enemy(x, y):
-    screen.blit(enemyImg, (x, y))
+def enemy(x, y, i):
+    screen.blit(enemyImg[i], (x, y))
 
 
 def fire_bullet(x, y):
@@ -133,32 +133,35 @@ while running:
         bulletY = playerY
         bulletState = "ready"
 
-    # Enemy movement
-    enemyX += enemyX_change
+    # detect which enemy
+    for i in range(num_of_enemies):
+        # Enemy movement
+        enemyX[i] += enemyX_change[i]
 
-    # Enemy: boundary control for X and Y axis
-    if enemyX <= boundaryLeft:
-        enemyX_change = speed
-        enemyY += enemyY_change
-    elif enemyX >= boundaryRight - shipWidth:
-        enemyX_change = -speed
-        enemyY += enemyY_change
+        # Enemy: boundary control for X and Y axis
+        if enemyX[i] <= boundaryLeft:
+            enemyX_change[i] = enemySpeed
+            enemyY[i] += enemyY_change[i]
+        elif enemyX[i] >= boundaryRight - shipWidth:
+            enemyX_change[i] = -enemySpeed
+            enemyY[i] += enemyY_change[i]
 
-    # collision
-    collision = is_collision(enemyX, enemyY, bulletX, bulletY)
-    if collision:
-        # reset bullet
-        bulletY = playerY
-        bulletState = "ready"
-        # add score
-        score += 1
-        print(score)
-        # reset enemy
-        enemyX = random.randint(0, 735)
-        enemyY = random.randint(50, 200)
+        # collision
+        collision = is_collision(enemyX[i], enemyY[i], bulletX, bulletY)
+        if collision:
+            # reset bullet
+            bulletY = playerY
+            bulletState = "ready"
+            # add score
+            score += 1
+            print(score)
+            # reset enemy
+            enemyX[i] = random.randint(0, 735)
+            enemyY[i] = random.randint(50, 200)
+        # placement of enemy
+        enemy(enemyX[i], enemyY[i], i)
 
     # placement of objects
     player(playerX, playerY)
-    enemy(enemyX, enemyY)
 
     pygame.display.update()
