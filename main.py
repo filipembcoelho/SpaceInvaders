@@ -20,6 +20,7 @@ background = pygame.image.load('images/background.png')
 # Speed
 speed = 1.5
 enemySpeed = 1.5
+bulletSpeed = 10
 
 # Player
 playerImg = pygame.image.load('images/player.png')
@@ -34,6 +35,15 @@ enemyY = random.randint(50, 200)
 enemyX_change = enemySpeed
 enemyY_change = 40
 
+# Bullet
+bulletImg = pygame.image.load('images/bullet.png')
+bulletX = 0
+bulletY = playerY
+bulletY_change = bulletSpeed
+# ready - No bullet on screen
+# fire - Bullet is moving
+bulletState = "ready"
+
 boundaryLeft = 0
 boundaryRight = 800
 
@@ -46,6 +56,13 @@ def player(x, y):
 # enemy coordinates
 def enemy(x, y):
     screen.blit(enemyImg, (x, y))
+
+
+def fire_bullet(x, y):
+    global bulletState
+    bulletState = "fire"
+    # start from the middle of the player ship
+    screen.blit(bulletImg, (x + 16, y + 10))
 
 
 # listen for the QUIT event on the screen - infinite loop
